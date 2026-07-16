@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERD — Sistem Informasi Layanan Publik Kebudayaan</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid #334155;
+            padding: 24px 40px;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            padding: 16px 40px;
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .toolbar button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #334155;
+            color: #e2e8f0;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toolbar button:hover {
+            background: #475569;
+            border-color: #64748b;
+        }
+
+        .toolbar .separator {
+            width: 1px;
+            height: 28px;
+            background: #475569;
+        }
+
+        .toolbar .info {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        #erd-container {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            overflow: auto;
+            min-height: calc(100vh - 140px);
+        }
+
+        #erd-container .mermaid {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            max-width: 100%;
+            overflow: auto;
+        }
+
+        /* Legend */
+        .legend {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 0.75rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .legend h4 {
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            color: #cbd5e1;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-pk { background: #f59e0b; }
+        .dot-fk { background: #3b82f6; }
+        .dot-enum { background: #a78bfa; }
+        .dot-req { background: #ef4444; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📐 Entity Relationship Diagram</h1>
+    <p>Sistem Informasi Layanan Publik Kebudayaan — Balai Pelestarian Kebudayaan DI Yogyakarta</p>
+</header>
+
+<div class="toolbar">
+    <button onclick="zoomIn()">🔍+ Zoom In</button>
+    <button onclick="zoomOut()">🔍− Zoom Out</button>
+    <button onclick="resetZoom()">↺ Reset</button>
+    <div class="separator"></div>
+    <button onclick="downloadSVG()">⬇ Download SVG</button>
+    <span class="info">10 tabel · Scroll/drag untuk navigasi</span>
+</div>
+
+<div id="erd-container">
+    <pre class="mermaid">
+erDiagram
+    users {
+        bigint id PK
+        string name "required"
+        enum role "admin | operator | pimpinan"
+        string email UK "required, unique"
+        string phone "nullable, max 20"
+        string position "nullable"
+        string password "required"
+        timestamp email_verified_at "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    site_categories {
+        bigint id PK
+        string name "required"
+        string slug UK "unique"
+        text description "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    heritage_sites {
+        bigint id PK
+        bigint site_category_id FK "FK site_categories"
+        string name "required"
+        string slug UK "unique"
+        text description "nullable"
+        text history "nullable"
+        text address "required"
+        string regency "required"
+        string district "nullable"
+        string village "nullable"
+        decimal latitude "required, decimal 10-7"
+        decimal longitude "required, decimal 10-7"
+        string operating_hours "nullable"
+        string contact "nullable"
+        string decree_number "nullable"
+        year designation_year "nullable"
+        enum status "active | inactive"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    site_photos {
+        bigint id PK
+        bigint heritage_site_id FK "FK heritage_sites"
+        string file_path "required"
+        string title "nullable"
+        text description "nullable"
+        integer sort_order "default 0"
+        boolean is_cover "default false"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    visit_requests {
+        bigint id PK
+        bigint heritage_site_id FK "FK heritage_sites"
+        string applicant_name "required"
+        string institution "nullable"
+        string phone "required, max 20"
+        string email "nullable"
+        date visit_date "required, min H-3"
+        uint visitor_count "required, max 100"
+        enum visit_purpose "tourism | education | research | other"
+        text purpose_description "nullable"
+        string application_letter "nullable, file"
+        string recommendation_letter "nullable, file, wajib jika research"
+        enum status "submitted | verified | approved | rejected | completed"
+        text verification_notes "nullable"
+        text rejection_reason "nullable"
+        uint actual_visitor_count "nullable"
+        bigint verified_by FK "FK users, nullable"
+        timestamp verified_at "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    facilities {
+        bigint id PK
+        bigint heritage_site_id FK "FK heritage_sites"
+        string name "required"
+        string slug UK "unique"
+        text description "nullable"
+        uint capacity "nullable"
+        boolean allow_concurrent "default false"
+        string photo "nullable, file"
+        enum status "available | unavailable | maintenance"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    facility_usages {
+        bigint id PK
+        bigint facility_id FK "FK facilities"
+        string applicant_name "required"
+        string institution "nullable"
+        string phone "required, max 20"
+        string email "nullable"
+        date start_date "required, min H-7"
+        date end_date "required, gte start_date"
+        string duration "nullable"
+        enum activity_type "traditional_ceremony | cultural_performance | education | exhibition | social_religious | other"
+        boolean is_commercial "default false"
+        text activity_description "nullable"
+        uint participant_count "nullable"
+        string application_letter "nullable, file"
+        string activity_proposal "nullable, file"
+        enum status "submitted | verified | pending_approval | approved | rejected | completed"
+        text verification_notes "nullable"
+        text approval_notes "nullable"
+        text rejection_reason "nullable"
+        text post_usage_condition "nullable"
+        bigint verified_by FK "FK users, nullable"
+        timestamp verified_at "nullable"
+        bigint approved_by FK "FK users, nullable"
+        timestamp approved_at "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    caretakers {
+        bigint id PK
+        bigint heritage_site_id FK "FK heritage_sites"
+        string name "required"
+        string id_number "nullable, NIP atau NIK"
+        string phone "nullable, max 20"
+        string email "nullable"
+        text address "nullable"
+        string photo "nullable, file"
+        boolean is_active "default true"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    site_maintenances {
+        bigint id PK
+        bigint heritage_site_id FK "FK heritage_sites"
+        bigint caretaker_id FK "FK caretakers"
+        date maintenance_date "required"
+        string activity_type "required"
+        text description "required"
+        enum site_condition "good | minor_damage | major_damage"
+        text follow_up "nullable"
+        boolean is_urgent "default false"
+        bigint verified_by FK "FK users, nullable"
+        timestamp verified_at "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    maintenance_photos {
+        bigint id PK
+        bigint site_maintenance_id FK "FK site_maintenances"
+        string file_path "required"
+        string caption "nullable"
+        timestamps created_at
+        timestamps updated_at
+    }
+
+    site_categories ||--o{ heritage_sites : "has many"
+    heritage_sites ||--o{ site_photos : "has many"
+    heritage_sites ||--o{ visit_requests : "has many"
+    heritage_sites ||--o{ facilities : "has many"
+    heritage_sites ||--o{ caretakers : "has many"
+    heritage_sites ||--o{ site_maintenances : "has many"
+    facilities ||--o{ facility_usages : "has many"
+    caretakers ||--o{ site_maintenances : "performs"
+    site_maintenances ||--o{ maintenance_photos : "has many"
+    users ||--o{ visit_requests : "verifies"
+    users ||--o{ facility_usages : "verifies"
+    users ||--o{ facility_usages : "approves"
+    users ||--o{ site_maintenances : "verifies"
+    </pre>
+</div>
+
+<div class="legend">
+    <h4>Legend</h4>
+    <div class="legend-item"><span class="legend-dot dot-pk"></span> PK — Primary Key</div>
+    <div class="legend-item"><span class="legend-dot dot-fk"></span> FK — Foreign Key</div>
+    <div class="legend-item"><span class="legend-dot dot-enum"></span> UK — Unique Key</div>
+</div>
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        er: {
+            diagramPadding: 30,
+            layoutDirection: 'TB',
+            minEntityWidth: 180,
+            minEntityHeight: 40,
+            entityPadding: 15,
+            useMaxWidth: false,
+        },
+        themeVariables: {
+            fontSize: '13px',
+        }
+    });
+</script>
+
+<script>
+    let currentScale = 1;
+    const container = document.getElementById('erd-container');
+
+    function zoomIn() {
+        currentScale = Math.min(currentScale + 0.15, 3);
+        applyZoom();
+    }
+
+    function zoomOut() {
+        currentScale = Math.max(currentScale - 0.15, 0.3);
+        applyZoom();
+    }
+
+    function resetZoom() {
+        currentScale = 1;
+        applyZoom();
+    }
+
+    function applyZoom() {
+        const mermaidEl = container.querySelector('.mermaid');
+        if (mermaidEl) {
+            mermaidEl.style.transform = `scale(${currentScale})`;
+            mermaidEl.style.transformOrigin = 'top center';
+        }
+    }
+
+    function downloadSVG() {
+        const svg = container.querySelector('svg');
+        if (!svg) { alert('ERD belum selesai di-render.'); return; }
+        const serializer = new XMLSerializer();
+        const source = serializer.serializeToString(svg);
+        const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'erd-sil-kebudayaan.svg';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '+' || e.key === '=') zoomIn();
+        if (e.key === '-') zoomOut();
+        if (e.key === '0') resetZoom();
+    });
+</script>
+
+</body>
+</html>
