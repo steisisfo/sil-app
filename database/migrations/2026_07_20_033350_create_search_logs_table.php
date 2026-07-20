@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maintenance_photos', function (Blueprint $table) {
+        Schema::create('search_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('site_maintenance_id')->constrained('site_maintenances')->cascadeOnDelete();
-            $table->string('file_path');
-            $table->string('caption')->nullable();
-            $table->timestamps();
+            $table->string('keyword')->index();
+            $table->integer('results_count')->default(0);
+            $table->timestamp('searched_at')->index();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maintenance_photos');
+        Schema::dropIfExists('search_logs');
     }
 };

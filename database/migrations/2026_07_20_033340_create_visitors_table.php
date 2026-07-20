@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_categories', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->timestamps();
+            $table->string('ip_address');
+            $table->string('user_agent')->nullable();
+            $table->string('page_url');
+            $table->timestamp('visited_at')->index();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('site_categories');
+        Schema::dropIfExists('visitors');
     }
 };

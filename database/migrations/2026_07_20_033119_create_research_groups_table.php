@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_photos', function (Blueprint $table) {
+        Schema::create('research_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('heritage_site_id')->constrained('heritage_sites')->cascadeOnDelete();
-            $table->string('file_path');
-            $table->string('title')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('sort_order')->default(0);
-            $table->boolean('is_cover')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('site_photos');
+        Schema::dropIfExists('research_groups');
     }
 };
