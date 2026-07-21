@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Filament\Resources\Partnerships;
+
+use App\Filament\Resources\Partnerships\Pages\CreatePartnership;
+use App\Filament\Resources\Partnerships\Pages\EditPartnership;
+use App\Filament\Resources\Partnerships\Pages\ListPartnerships;
+use App\Filament\Resources\Partnerships\Pages\ViewPartnership;
+use App\Filament\Resources\Partnerships\Schemas\PartnershipForm;
+use App\Filament\Resources\Partnerships\Schemas\PartnershipInfolist;
+use App\Filament\Resources\Partnerships\Tables\PartnershipsTable;
+use App\Models\Partnership;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class PartnershipResource extends Resource
+{
+    protected static ?string $model = Partnership::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function form(Schema $schema): Schema
+    {
+        return PartnershipForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return PartnershipInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return PartnershipsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListPartnerships::route('/'),
+            'create' => CreatePartnership::route('/create'),
+            'view' => ViewPartnership::route('/{record}'),
+            'edit' => EditPartnership::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+}
