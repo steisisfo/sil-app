@@ -26,7 +26,7 @@ class ServiceForm
                 TextInput::make('pic_contact')
                     ->required(),
                 FileUpload::make('document_file')
-                    ->label('Dokumen PDF')
+                    ->label(__('PDF Document'))
                     ->disk('public')
                     ->directory('documents')
                     ->acceptedFileTypes(['application/pdf'])

@@ -36,6 +36,6 @@ class Research extends Model
     public function lecturers()
     {
         return $this->belongsToMany(Lecturer::class, 'lecturer_research', 'research_id', 'lecturer_id')
-                    ->withPivot('is_primary_author');
+            ->withPivot('is_primary_author');
     }
 }

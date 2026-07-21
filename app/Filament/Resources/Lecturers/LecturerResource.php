@@ -24,6 +24,16 @@ class LecturerResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('Lecturer');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Lecturers');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return LecturerForm::configure($schema);

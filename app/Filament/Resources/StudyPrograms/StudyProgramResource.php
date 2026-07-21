@@ -24,6 +24,16 @@ class StudyProgramResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('Study Program');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Study Programs');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return StudyProgramForm::configure($schema);

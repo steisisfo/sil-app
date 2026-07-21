@@ -19,19 +19,19 @@ class LecturerForm
                 TextInput::make('functional_position')
                     ->required(),
                 Select::make('study_program_id')
-                    ->label('Program Studi')
+                    ->label(__('Study Program'))
                     ->relationship('studyProgram', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
                 Select::make('research_group_id')
-                    ->label('Kelompok Keahlian')
+                    ->label(__('Research Group'))
                     ->relationship('researchGroup', 'name')
                     ->searchable()
                     ->preload(),
                 TextInput::make('research_fields'),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('Email Address'))
                     ->email()
                     ->required(),
                 TextInput::make('photo'),

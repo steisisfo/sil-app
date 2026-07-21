@@ -17,7 +17,7 @@ class NewsForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->label('Judul')
+                    ->label(__('Title'))
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug($state)))
                     ->required(),
@@ -28,7 +28,7 @@ class NewsForm
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('image')
-                    ->label('Gambar Utama')
+                    ->label(__('Main Image'))
                     ->image()
                     ->disk('public')
                     ->directory('news')
@@ -36,27 +36,27 @@ class NewsForm
                     ->maxSize(5120)
                     ->required(fn (string $operation): bool => $operation === 'create'),
                 Select::make('category')
-                    ->label('Kategori')
+                    ->label(__('Category'))
                     ->options([
-                        'academic' => 'Akademik',
-                        'research' => 'Penelitian',
-                        'student_affairs' => 'Kemahasiswaan',
-                        'general' => 'Umum',
+                        'academic' => __('Academic'),
+                        'research' => __('Research'),
+                        'student_affairs' => __('Student Affairs'),
+                        'general' => __('General'),
                     ])
                     ->required(),
                 TextInput::make('tags'),
                 Select::make('author_id')
-                    ->label('Penulis')
+                    ->label(__('Author'))
                     ->relationship('author', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
                 Select::make('status')
-                    ->label('Status')
+                    ->label(__('Status'))
                     ->options([
-                        'draft' => 'Draf',
-                        'published' => 'Terbit',
-                        'archived' => 'Arsip',
+                        'draft' => __('Draft'),
+                        'published' => __('Published'),
+                        'archived' => __('Archived'),
                     ])
                     ->required(),
                 DateTimePicker::make('published_at'),

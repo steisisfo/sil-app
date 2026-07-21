@@ -19,19 +19,19 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'  => 'Andi Prasetyo',
+                'name' => 'Andi Prasetyo',
                 'email' => 'andi.admin@example.test',
-                'role'  => 'admin',
+                'role' => 'admin',
             ],
             [
-                'name'  => 'Sari Wulandari',
+                'name' => 'Sari Wulandari',
                 'email' => 'sari.konten@example.test',
-                'role'  => 'content_creator',
+                'role' => 'content_creator',
             ],
             [
-                'name'  => 'Rizal Firmansyah',
+                'name' => 'Rizal Firmansyah',
                 'email' => 'rizal.konten@example.test',
-                'role'  => 'content_creator',
+                'role' => 'content_creator',
             ],
         ];
 
@@ -39,9 +39,9 @@ class UserSeeder extends Seeder
             User::updateOrCreate(
                 ['email' => $userData['email']],
                 [
-                    'name'              => $userData['name'],
-                    'password'          => Hash::make('password'),
-                    'role'              => $userData['role'],
+                    'name' => $userData['name'],
+                    'password' => Hash::make('password'),
+                    'role' => $userData['role'],
                     'email_verified_at' => now(),
                 ]
             );

@@ -45,7 +45,7 @@ class VisitorSeeder extends Seeder
                 [
                     'ip_address' => $log['ip_address'],
                     'page_url' => $log['page_url'],
-                    'visited_at' => $log['visited_at']
+                    'visited_at' => $log['visited_at'],
                 ],
                 $log
             );

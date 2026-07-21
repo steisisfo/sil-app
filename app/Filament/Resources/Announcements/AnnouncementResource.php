@@ -24,6 +24,16 @@ class AnnouncementResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('Announcement');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Announcements');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return AnnouncementForm::configure($schema);

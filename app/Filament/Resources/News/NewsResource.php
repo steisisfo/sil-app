@@ -24,6 +24,16 @@ class NewsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('News');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('News');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return NewsForm::configure($schema);

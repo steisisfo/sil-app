@@ -13,8 +13,8 @@ class AdmissionSeeder extends Seeder
             [
                 'selection_path' => 'Seleksi Nasional Berdasarkan Prestasi (SNBP)',
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan yang memiliki prestasi unggul.' . "\n" .
-                                            '2. Memiliki NIK dan NISN yang terdaftar di PDSS.' . "\n" .
+                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan yang memiliki prestasi unggul.'."\n".
+                                            '2. Memiliki NIK dan NISN yang terdaftar di PDSS.'."\n".
                                             '3. Mengunggah nilai rapor semester 1 s.d. 5.',
                 'start_date' => '2026-01-08',
                 'end_date' => '2026-02-15',
@@ -31,8 +31,8 @@ class AdmissionSeeder extends Seeder
             [
                 'selection_path' => 'Seleksi Nasional Berdasarkan Tes (SNBT)',
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau paket C dengan umur maksimal 22 tahun.' . "\n" .
-                                            '2. Memiliki nilai UTBK-SNBT tahun berjalan.' . "\n" .
+                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau paket C dengan umur maksimal 22 tahun.'."\n".
+                                            '2. Memiliki nilai UTBK-SNBT tahun berjalan.'."\n".
                                             '3. Melakukan registrasi akun SNPMB.',
                 'start_date' => '2026-03-21',
                 'end_date' => '2026-04-19',
@@ -48,8 +48,8 @@ class AdmissionSeeder extends Seeder
             [
                 'selection_path' => 'Seleksi Mandiri ITB (SM-ITB)',
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau maksimal 2 tahun sebelumnya.' . "\n" .
-                                            '2. Memiliki nilai UTBK-SNBT dan nilai rapor.' . "\n" .
+                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau maksimal 2 tahun sebelumnya.'."\n".
+                                            '2. Memiliki nilai UTBK-SNBT dan nilai rapor.'."\n".
                                             '3. Tidak buta warna untuk program studi tertentu di STEI.',
                 'start_date' => '2026-05-24',
                 'end_date' => '2026-06-20',

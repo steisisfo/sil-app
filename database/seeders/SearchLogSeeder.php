@@ -40,7 +40,7 @@ class SearchLogSeeder extends Seeder
             SearchLog::firstOrCreate(
                 [
                     'keyword' => $log['keyword'],
-                    'searched_at' => $log['searched_at']
+                    'searched_at' => $log['searched_at'],
                 ],
                 $log
             );

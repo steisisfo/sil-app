@@ -26,7 +26,7 @@ class LecturerInfolist
                 TextEntry::make('research_fields')
                     ->placeholder('-'),
                 TextEntry::make('email')
-                    ->label('Email address'),
+                    ->label(__('Email Address')),
                 TextEntry::make('photo')
                     ->placeholder('-'),
                 TextEntry::make('scopus_link'),

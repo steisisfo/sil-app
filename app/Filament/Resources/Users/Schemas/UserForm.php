@@ -16,22 +16,22 @@ class UserForm
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('Email Address'))
                     ->email()
                     ->required(),
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
-                    ->label('Kata Sandi')
+                    ->label(__('Password'))
                     ->password()
                     ->revealable()
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->dehydrated(fn ($state): bool => filled($state))
                     ->minLength(8),
                 Select::make('role')
-                    ->label('Peran')
+                    ->label(__('Role'))
                     ->options([
-                        'admin' => 'Administrator',
-                        'content_creator' => 'Pengelola Konten',
+                        'admin' => __('Administrator'),
+                        'content_creator' => __('Content Creator'),
                     ])
                     ->default('content_creator')
                     ->required(),

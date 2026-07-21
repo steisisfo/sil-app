@@ -24,6 +24,16 @@ class ResearchGroupResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('Research Group');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Research Groups');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ResearchGroupForm::configure($schema);

@@ -33,11 +33,11 @@ class ResearchGroupsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('lecturers_count')
-                    ->label('Jumlah Dosen')
+                    ->label(__('Number of Lecturers'))
                     ->counts('lecturers')
                     ->sortable(),
                 TextColumn::make('researches_count')
-                    ->label('Jumlah Penelitian')
+                    ->label(__('Number of Researches'))
                     ->counts('researches')
                     ->sortable(),            ])
             ->filters([

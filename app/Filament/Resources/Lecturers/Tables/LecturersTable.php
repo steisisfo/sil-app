@@ -35,7 +35,7 @@ class LecturersTable
                 TextColumn::make('research_fields')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('Email Address'))
                     ->searchable(),
                 TextColumn::make('photo')
                     ->searchable(),
