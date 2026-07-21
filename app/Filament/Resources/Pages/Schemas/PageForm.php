@@ -15,11 +15,11 @@ class PageForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->required(),
+                    ->required(fn ($livewire) => ! method_exists($livewire, 'getActiveLocale') || $livewire->getActiveLocale() === 'id'),
                 TextInput::make('slug')
                     ->required(),
                 Textarea::make('content')
-                    ->required()
+                    ->required(fn ($livewire) => ! method_exists($livewire, 'getActiveLocale') || $livewire->getActiveLocale() === 'id')
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image(),

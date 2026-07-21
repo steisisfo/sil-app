@@ -14,9 +14,9 @@ class AnnouncementSeeder extends Seeder
 
         $announcements = [
             [
-                'title' => 'Pendaftaran Asisten Kuliah STEI Semester Ganjil 2026/2027',
+                'title' => ['id' => 'Pendaftaran Asisten Kuliah STEI Semester Ganjil 2026/2027', 'en' => 'Registration for STEI Course Assistants Odd Semester 2026/2027'],
                 'slug' => 'pendaftaran-asisten-kuliah-ganjil-2026',
-                'content' => 'Dibuka kesempatan bagi mahasiswa S1 tingkat akhir maupun S2 untuk melamar sebagai Asisten Kuliah dan Praktikum di lingkungan STEI ITB. Pendaftaran ditutup pada tanggal 10 Agustus 2026 secara online.',
+                'content' => ['id' => 'Dibuka kesempatan bagi mahasiswa S1 tingkat akhir maupun S2 untuk melamar sebagai Asisten Kuliah dan Praktikum di lingkungan STEI ITB. Pendaftaran ditutup pada tanggal 10 Agustus 2026 secara online.'],
                 'target_audience' => 'students',
                 'valid_from' => '2026-07-20 00:00:00',
                 'valid_until' => '2026-08-10 23:59:59',
@@ -27,9 +27,9 @@ class AnnouncementSeeder extends Seeder
                 'author_id' => $creator ? $creator->id : null,
             ],
             [
-                'title' => 'Pengisian Evaluasi Perkuliahan Akhir (EPA) Semester Genap 2025/2026',
+                'title' => ['id' => 'Pengisian Evaluasi Perkuliahan Akhir (EPA) Semester Genap 2025/2026', 'en' => 'Final Course Evaluation (EPA) Filling Even Semester 2025/2026'],
                 'slug' => 'pengisian-evaluasi-perkuliahan-akhir-genap',
-                'content' => 'Diimbau kepada seluruh mahasiswa aktif STEi ITB untuk segera mengisi kuesioner EPA melalui portal akademik SIX ITB sebelum pelaksanaan ujian akhir semester.',
+                'content' => ['id' => 'Diimbau kepada seluruh mahasiswa aktif STEi ITB untuk segera mengisi kuesioner EPA melalui portal akademik SIX ITB sebelum pelaksanaan ujian akhir semester.'],
                 'target_audience' => 'students',
                 'valid_from' => '2026-06-01 00:00:00',
                 'valid_until' => '2026-06-25 23:59:59',
@@ -40,9 +40,9 @@ class AnnouncementSeeder extends Seeder
                 'author_id' => $creator ? $creator->id : null,
             ],
             [
-                'title' => 'PENGUMUMAN DARURAT: Gangguan Jaringan Utama Router STEI',
+                'title' => ['id' => 'PENGUMUMAN DARURAT: Gangguan Jaringan Utama Router STEI', 'en' => 'EMERGENCY ANNOUNCEMENT: Main Network Router Disruption at STEI'],
                 'slug' => 'darurat-gangguan-jaringan-utama-stei',
-                'content' => 'Diberitahukan bahwa sedang terjadi kerusakan perangkat router jaringan serat optik Labtek V dan VIII. Akses internet lokal dan e-learning STEI ITB akan terganggu hari ini hingga perbaikan teknis selesai dilakukan.',
+                'content' => ['id' => 'Diberitahukan bahwa sedang terjadi kerusakan perangkat router jaringan serat optik Labtek V dan VIII. Akses internet lokal dan e-learning STEI ITB akan terganggu hari ini hingga perbaikan teknis selesai dilakukan.'],
                 'target_audience' => 'general',
                 'valid_from' => '2026-07-20 08:00:00',
                 'valid_until' => '2026-07-21 18:00:00',

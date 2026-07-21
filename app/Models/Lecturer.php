@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class Lecturer extends Model
 {
+    use HasTranslations;
     use SoftDeletes;
+
+    public $translatable = [
+        'functional_position',
+        'research_fields',
+        'lab_managed',
+    ];
 
     protected $fillable = [
         'name',

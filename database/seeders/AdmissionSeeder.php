@@ -11,11 +11,11 @@ class AdmissionSeeder extends Seeder
     {
         $admissions = [
             [
-                'selection_path' => 'Seleksi Nasional Berdasarkan Prestasi (SNBP)',
+                'selection_path' => ['id' => 'Seleksi Nasional Berdasarkan Prestasi (SNBP)', 'en' => 'National Selection Based on Achievement (SNBP)'],
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan yang memiliki prestasi unggul.'."\n".
+                'admission_requirements' => ['id' => '1. Lulusan SMA/MA/SMK tahun berjalan yang memiliki prestasi unggul.'."\n".
                                             '2. Memiliki NIK dan NISN yang terdaftar di PDSS.'."\n".
-                                            '3. Mengunggah nilai rapor semester 1 s.d. 5.',
+                                            '3. Mengunggah nilai rapor semester 1 s.d. 5.'],
                 'start_date' => '2026-01-08',
                 'end_date' => '2026-02-15',
                 'tuition_fee' => 12500000.00,
@@ -29,11 +29,11 @@ class AdmissionSeeder extends Seeder
                 'status' => 'active',
             ],
             [
-                'selection_path' => 'Seleksi Nasional Berdasarkan Tes (SNBT)',
+                'selection_path' => ['id' => 'Seleksi Nasional Berdasarkan Tes (SNBT)', 'en' => 'National Selection Based on Test (SNBT)'],
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau paket C dengan umur maksimal 22 tahun.'."\n".
+                'admission_requirements' => ['id' => '1. Lulusan SMA/MA/SMK tahun berjalan atau paket C dengan umur maksimal 22 tahun.'."\n".
                                             '2. Memiliki nilai UTBK-SNBT tahun berjalan.'."\n".
-                                            '3. Melakukan registrasi akun SNPMB.',
+                                            '3. Melakukan registrasi akun SNPMB.'],
                 'start_date' => '2026-03-21',
                 'end_date' => '2026-04-19',
                 'tuition_fee' => 12500000.00,
@@ -46,11 +46,11 @@ class AdmissionSeeder extends Seeder
                 'status' => 'active',
             ],
             [
-                'selection_path' => 'Seleksi Mandiri ITB (SM-ITB)',
+                'selection_path' => ['id' => 'Seleksi Mandiri ITB (SM-ITB)', 'en' => 'ITB Independent Selection (SM-ITB)'],
                 'degree_level' => 'S1',
-                'admission_requirements' => '1. Lulusan SMA/MA/SMK tahun berjalan atau maksimal 2 tahun sebelumnya.'."\n".
+                'admission_requirements' => ['id' => '1. Lulusan SMA/MA/SMK tahun berjalan atau maksimal 2 tahun sebelumnya.'."\n".
                                             '2. Memiliki nilai UTBK-SNBT dan nilai rapor.'."\n".
-                                            '3. Tidak buta warna untuk program studi tertentu di STEI.',
+                                            '3. Tidak buta warna untuk program studi tertentu di STEI.'],
                 'start_date' => '2026-05-24',
                 'end_date' => '2026-06-20',
                 'tuition_fee' => 25000000.00,
@@ -66,7 +66,7 @@ class AdmissionSeeder extends Seeder
 
         foreach ($admissions as $a) {
             Admission::updateOrCreate(
-                ['selection_path' => $a['selection_path'], 'degree_level' => $a['degree_level']],
+                ['contact_info' => $a['contact_info']],
                 $a
             );
         }

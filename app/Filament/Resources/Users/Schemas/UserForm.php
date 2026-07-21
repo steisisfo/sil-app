@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Enums\PermissionType;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -27,14 +28,14 @@ class UserForm
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->dehydrated(fn ($state): bool => filled($state))
                     ->minLength(8),
-                Select::make('role')
+                Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->maxItems(1)
+                    ->preload()
+                    ->searchable()
                     ->label(__('Role'))
-                    ->options([
-                        'admin' => __('Administrator'),
-                        'content_creator' => __('Content Creator'),
-                    ])
-                    ->default('content_creator')
-                    ->required(),
+                    ->visible(fn () => auth()->user()->can(PermissionType::MANAGE_ROLES->value)),
             ]);
     }
 }

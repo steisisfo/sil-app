@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class Admission extends Model
 {
+    use HasTranslations;
     use SoftDeletes;
+
+    public $translatable = [
+        'selection_path',
+        'admission_requirements',
+    ];
 
     protected $fillable = [
         'selection_path',

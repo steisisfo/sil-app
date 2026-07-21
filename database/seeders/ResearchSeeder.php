@@ -12,9 +12,9 @@ class ResearchSeeder extends Seeder
     public function run(): void
     {
         // Ambil data master kelompok keahlian
-        $rgRpl = ResearchGroup::where('name', 'Kelompok Keahlian Rekayasa Perangkat Lunak dan Data')->first();
-        $rgTel = ResearchGroup::where('name', 'Kelompok Keahlian Telekomunikasi')->first();
-        $rgTk = ResearchGroup::where('name', 'Kelompok Keahlian Teknik Komputer')->first();
+        $rgRpl = ResearchGroup::where('name->id', 'Kelompok Keahlian Rekayasa Perangkat Lunak dan Data')->first();
+        $rgTel = ResearchGroup::where('name->id', 'Kelompok Keahlian Telekomunikasi')->first();
+        $rgTk = ResearchGroup::where('name->id', 'Kelompok Keahlian Teknik Komputer')->first();
 
         // Ambil dosen untuk direlasikan
         $lecturerTutun = Lecturer::where('email', 'tutun@stei.itb.ac.id')->first();
@@ -24,8 +24,8 @@ class ResearchSeeder extends Seeder
         // Buat data riset/publikasi
         $researches = [
             [
-                'title' => 'Development of Decentralized Cryptography for Lightweight IoT Devices',
-                'abstract' => 'Penelitian ini mengembangkan skema kriptografi ringan terdesentralisasi menggunakan blockchain mini untuk mengamankan komunikasi data pada perangkat IoT dengan sumber daya terbatas.',
+                'title' => ['id' => 'Development of Decentralized Cryptography for Lightweight IoT Devices', 'en' => 'Development of Decentralized Cryptography for Lightweight IoT Devices'],
+                'abstract' => ['id' => 'Penelitian ini mengembangkan skema kriptografi ringan terdesentralisasi menggunakan blockchain mini untuk mengamankan komunikasi data pada perangkat IoT dengan sumber daya terbatas.'],
                 'year' => 2024,
                 'type' => 'journal',
                 'document_link' => 'https://doi.org/10.1016/j.iot.2024.100100',
@@ -38,8 +38,8 @@ class ResearchSeeder extends Seeder
                 ],
             ],
             [
-                'title' => 'Performance Analysis of 5G Non-Terrestrial Network in Mountainous Areas',
-                'abstract' => 'Penelitian ini menganalisis propagasi dan redaman sinyal 5G dari satelit orbit rendah (LEO) ke area pegunungan di Indonesia menggunakan pemodelan 3D ray-tracing.',
+                'title' => ['id' => 'Performance Analysis of 5G Non-Terrestrial Network in Mountainous Areas', 'en' => 'Performance Analysis of 5G Non-Terrestrial Network in Mountainous Areas'],
+                'abstract' => ['id' => 'Penelitian ini menganalisis propagasi dan redaman sinyal 5G dari satelit orbit rendah (LEO) ke area pegunungan di Indonesia menggunakan pemodelan 3D ray-tracing.'],
                 'year' => 2025,
                 'type' => 'conference',
                 'document_link' => 'https://doi.org/10.1109/NTN.2025.01',
@@ -51,8 +51,8 @@ class ResearchSeeder extends Seeder
                 ],
             ],
             [
-                'title' => 'Steganografi Citra Digital Berbasis Modifikasi Bit Least Significant Bit Tingkat Lanjut',
-                'abstract' => 'Metode baru steganografi citra digital dengan menyembunyikan data rahasia pada piksel tepi citra untuk meningkatkan keamanan terhadap analisis statistik steganalisis.',
+                'title' => ['id' => 'Steganografi Citra Digital Berbasis Modifikasi Bit Least Significant Bit Tingkat Lanjut', 'en' => 'Advanced Digital Image Steganography Based on Least Significant Bit Modification'],
+                'abstract' => ['id' => 'Metode baru steganografi citra digital dengan menyembunyikan data rahasia pada piksel tepi citra untuk meningkatkan keamanan terhadap analisis statistik steganalisis.'],
                 'year' => 2023,
                 'type' => 'journal',
                 'document_link' => 'https://doi.org/10.22146/jnteti.v12i2.200',
@@ -70,7 +70,7 @@ class ResearchSeeder extends Seeder
             unset($rData['authors']);
 
             $research = Research::updateOrCreate(
-                ['title' => $rData['title']],
+                ['document_link' => $rData['document_link']],
                 $rData
             );
 

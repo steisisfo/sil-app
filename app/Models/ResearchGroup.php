@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class ResearchGroup extends Model
 {
+    use HasTranslations;
     use SoftDeletes;
+
+    public $translatable = [
+        'name',
+        'description',
+    ];
 
     protected $fillable = [
         'name',

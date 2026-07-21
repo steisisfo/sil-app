@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class Research extends Model
 {
+    use HasTranslations;
     use SoftDeletes;
+
+    public $translatable = [
+        'title',
+        'abstract',
+    ];
 
     // Menentukan nama tabel secara eksplisit karena plural dari research dalam Laravel
     // bisa jadi terdeteksi otomatis secara kurang tepat jika menggunakan inflektor bawaan (researches).

@@ -36,15 +36,15 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $userData) {
-            User::updateOrCreate(
+            $user = User::updateOrCreate(
                 ['email' => $userData['email']],
                 [
                     'name' => $userData['name'],
                     'password' => Hash::make('password'),
-                    'role' => $userData['role'],
                     'email_verified_at' => now(),
                 ]
             );
+            $user->syncRoles([$userData['role']]);
         }
     }
 }

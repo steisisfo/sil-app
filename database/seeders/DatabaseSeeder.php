@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // 0. Permissions and Roles
+            PermissionSeeder::class,
+            RoleSeeder::class,
+
             // 1. Master Tables (Tanpa ketergantungan)
             UserSeeder::class,
             StudyProgramSeeder::class,
