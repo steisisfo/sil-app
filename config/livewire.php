@@ -43,8 +43,7 @@ return [
     | In this case, the content of pages::create-post will render into $slot.
     |
     */
-
-    'component_layout' => 'layouts::app',
+    'component_layout' => 'components.layouts.app',
 
     /*
     |---------------------------------------------------------------------------

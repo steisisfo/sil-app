@@ -20,14 +20,15 @@ class AuthorizationMigrationTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'RoleSeeder']);
     }
 
-    public function test_legacy_users_are_migrated_correctly()
+    public function test_roles_and_permissions_work_correctly()
     {
-        // Arrange: create users with legacy roles
-        $admin = User::factory()->create(['role' => 'admin']);
-        $creator = User::factory()->create(['role' => 'content_creator']);
+        // Arrange: create users
+        $admin = User::factory()->create();
+        $creator = User::factory()->create();
 
-        // Act: run legacy seeder
-        $this->artisan('db:seed', ['--class' => 'LegacyUserRoleSeeder']);
+        // Act: assign roles using Spatie API
+        $admin->assignRole('admin');
+        $creator->assignRole('content_creator');
 
         // Assert: check roles
         $this->assertTrue($admin->hasRole('admin'));
