@@ -4,9 +4,11 @@ namespace App\Filament\Resources\News\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class NewsForm
 {
@@ -15,7 +17,7 @@ class NewsForm
         return $schema
             ->components([
                 TextInput::make('title')
-    ->label('Judul')
+                    ->label('Judul')
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug($state)))
                     ->required(),
@@ -31,13 +33,24 @@ class NewsForm
                     ->disk('public')
                     ->directory('news')
                     ->imageEditor()
-                    ->maxSize(5120),
-                TextInput::make('category')
+                    ->maxSize(5120)
+                    ->required(fn (string $operation): bool => $operation === 'create'),
+                Select::make('category')
+                    ->label('Kategori')
+                    ->options([
+                        'academic' => 'Akademik',
+                        'research' => 'Penelitian',
+                        'student_affairs' => 'Kemahasiswaan',
+                        'general' => 'Umum',
+                    ])
                     ->required(),
                 TextInput::make('tags'),
-                TextInput::make('author_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('author_id')
+                    ->label('Penulis')
+                    ->relationship('author', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Select::make('status')
                     ->label('Status')
                     ->options([

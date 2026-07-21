@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Lecturers\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -18,7 +19,7 @@ class LecturerForm
                 TextInput::make('functional_position')
                     ->required(),
                 Select::make('study_program_id')
-    ->label('Program Studi')
+                    ->label('Program Studi')
                     ->relationship('studyProgram', 'name')
                     ->searchable()
                     ->preload()
